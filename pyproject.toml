@@ -1,0 +1,10 @@
+[project]
+name = "pii-ollama"
+version = "0.1.0"
+description = "Use Ollama models to either redact or extract PII from documents"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ollama>=0.4.7",
+    "pydantic>=2.11.2",
+]
