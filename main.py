@@ -4,6 +4,12 @@ import sys
 from pydantic import BaseModel, Field
 from pprint import pprint
 import json
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+
+# Ollama API docs: https://github.com/ollama/ollama/blob/main/docs/api.md
 
 class MedicalReportSummary(BaseModel):
     patient_name: str = Field(..., description="The patient's full name.")
@@ -21,6 +27,21 @@ class MedicalReportSummary(BaseModel):
             f"Summary: {self.report_summary}"
         )
 
+def get_largest_model():
+    """Retrieves the largest available Ollama model."""
+    try:
+        models = ollama.list()['models']
+        if not models:
+            return None
+    
+        # Sort models by size (assuming size is in bytes)
+        biggest_model = max(models, key=lambda model: model.get('size', 0))['model']
+        logging.info(f"Using: {biggest_model}")
+        return biggest_model
+    except Exception as e:
+        logging.error(f"Error getting models: {e}")
+        return None
+    
 def process_file_with_ollama_pydantic(file_path, model_name, instructions):
     """
     Sends file content to Ollama, forces output to a Pydantic schema, and prints the result.
@@ -37,6 +58,7 @@ def process_file_with_ollama_pydantic(file_path, model_name, instructions):
             model=model_name,
             stream=False,
             format='json',
+            keep_alive="10m",
             messages=[
                 {
                     'role': 'user',
@@ -44,21 +66,24 @@ def process_file_with_ollama_pydantic(file_path, model_name, instructions):
                 },
             ],
         )
+        logging.info("Ollama API call successful.")
 
         try:
             json_response = json.loads(response['message']['content'])
             summary_object = MedicalReportSummary(**json_response)
-            print(summary_object) # uses the __str__ function
+            logging.info("JSON response successfully parsed.")
+
+            return summary_object
 
         except json.JSONDecodeError:
-            print(f"Error: Ollama did not return valid JSON. Response:\n{response['message']['content']}")
+            logging.error(f"Ollama did not return valid JSON. Response:\n{response['message']['content']}")
         except Exception as e:
-            print(f"Error: {e}")
+            logging.error(f"Error parsing JSON response: {e}")
 
     except FileNotFoundError:
-        print(f"Error: File not found at {file_path}")
+        logging.error(f"File not found at {file_path}")
     except Exception as e:
-        print(f"An error occurred: {e}")
+        logging.error(f"An error occurred during file processing: {e}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
@@ -66,7 +91,11 @@ if __name__ == "__main__":
         sys.exit(1)
 
     file_path = sys.argv[1]
-    model_name = "gemma3:12b"
+    model_name = get_largest_model()
+    if not model_name:
+        logging.error("No Ollama models found. Exiting.")
+        sys.exit(1)
+
     instructions = """Extract to JSON the:
         patient's name,
         date of birth, 
@@ -75,4 +104,10 @@ if __name__ == "__main__":
         and provide a short summary of the medical report. Respond only with valid JSON. Do not write an introduction or summary.
 """
 
-    process_file_with_ollama_pydantic(file_path, model_name, instructions)
+    obj = process_file_with_ollama_pydantic(file_path, model_name, instructions)
+
+    if obj:
+        print("Parsed Medical Report Summary:")
+        print(json.dumps(json.loads(obj.json()), indent=2))
+    else:
+        logging.error("Failed to parse the medical report.")
