@@ -16,7 +16,7 @@ class MedicalReportSummary(BaseModel):
     date_of_birth: str = Field(..., description="The patient's date of birth (YYYY-MM-DD).")
     medical_record_number: str = Field(..., description="The patient's Medical Record Number (MRN).")
     date_of_report: str = Field(..., description="The date the report was generated (YYYY-MM-DD).")
-    report_summary: str = Field(..., description="A concise summary of the medical report.")
+    report_summary: str = Field(..., description="A medically concise summary of the medical report.")
 
     def __str__(self):
         return (
@@ -108,6 +108,6 @@ if __name__ == "__main__":
 
     if obj:
         print("Parsed Medical Report Summary:")
-        print(json.dumps(json.loads(obj.json()), indent=2))
+        print(obj.model_dump_json(indent=2))
     else:
         logging.error("Failed to parse the medical report.")
