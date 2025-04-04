@@ -1,11 +1,13 @@
 **[Hospital/Clinic Logo/Letterhead]**
 
+NOTE: ****\***** This is synthetic data with textual "noise" ****\*****
+
 **Patient Medical Report**
 
-**Patient Name:** Isabella Rodriguez
-**Date of Birth:** 1988-03-22
-**Medical Record Number (MRN):** RH-478291
-**Date of Report:** 2024-10-27
+**Name:** Isabella|Rodriguez
+**DOB:** 1988-04-10
+**Medical Record Number:** RH-47428291
+**Date of Report:** 2024-10-28
 
 **Referring Physician:** Dr. Samuel Chen
 
@@ -17,39 +19,39 @@ Ms. Rodriguez presents to the orthopedic clinic with right knee pain that began 
 
 **Past Medical History:**
 
-* No known chronic medical conditions.
-* No known drug allergies (NKDA).
+- No known chronic medical conditions.
+- No known drug allergies (NKDA).
 
 **Medications:**
 
-* None.
+- None.
 
 **Family History:**
 
-* Non-contributory.
+- Non-contributory.
 
 **Social History:**
 
-* Active lifestyle, enjoys hiking and running.
-* Non-smoker.
-* Occasional alcohol consumption.
+- Active lifestyle, enjoys hiking and running.
+- Non-smoker.
+- Occasional alcohol consumption.
 
 **Physical Examination:**
 
-* **General:** Alert and oriented, in mild discomfort.
-* **Vital Signs:** Blood pressure 120/80 mmHg, heart rate 78 bpm, respiratory rate 16 breaths/min.
-* **Musculoskeletal:**
-    * Right knee: Mild effusion, tenderness to palpation along the medial joint line.
-    * Positive McMurray's test (medial).
-    * Lachman's test and anterior drawer test negative.
-    * Range of motion limited due to pain.
-    * No ligamentous laxity noted.
-    * Remainder of musculoskeletal examination within normal limits.
-* **Neurological:** Intact sensation and motor function in the right lower extremity.
+- **General:** Alert and oriented, in mild discomfort.
+- **Vital Signs:** Blood pressure 120/80 mmHg, heart rate 78 bpm, respiratory rate 16 breaths/min.
+- **Musculoskeletal:**
+  - Right knee: Mild effusion, tenderness to palpation along the medial joint line.
+  - Positive McMurray's test (medial).
+  - Lachman's test and anterior drawer test negative.
+  - Range of motion limited due to pain.
+  - No ligamentous laxity noted.
+  - Remainder of musculoskeletal examination within normal limits.
+- **Neurological:** Intact sensation and motor function in the right lower extremity.
 
 **Imaging:**
 
-* Right knee X-ray (AP and lateral views): No evidence of fracture.
+- Right knee X-ray (AP and lateral views): No evidence of fracture.
 
 **Assessment:**
 
@@ -64,14 +66,14 @@ Ms. Rodriguez presents to the orthopedic clinic with right knee pain that began 
 3.  Recommend RICE therapy (rest, ice, compression, elevation).
 4.  Knee immobilizer for 2 weeks.
 5.  Follow-up appointment in one week to review MRI results and discuss treatment options.
-6. Referral to physical therapy after MRI review.
+6.  Referral to physical therapy after MRI review.
 
 **Physician Signature:** Dr. Samuel Chen, MD.
 **Physician Stamp:** [Physician Stamp/Credentials]
 
 **Radiology Report Addendum (Following MRI):**
 
-* MRI of the right knee demonstrates a tear of the posterior horn of the medial meniscus. No significant ligamentous injury. Mild joint effusion is present.
+- MRI of the right knee demonstrates a tear of the posterior horn of the medial meniscus. No significant ligamentous injury. Mild joint effusion is present.
 
 **Revised Plan:**
 
