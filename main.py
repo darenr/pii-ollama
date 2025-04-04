@@ -29,7 +29,9 @@ def process_file_with_ollama_pydantic(file_path, model_name, instructions):
         with open(file_path, 'r', encoding='utf-8') as file:
             file_content = file.read()
 
-        prompt = f"{instructions}\n\nFile Content:\n{file_content}\n\nReturn the data in JSON format that matches the following schema:\n{MedicalReportSummary.schema_json(indent=2)}"
+        schema = json.dumps(MedicalReportSummary.model_json_schema(), indent=2) #Correct way to get schema.
+
+        prompt = f"{instructions}\n\nFile Content:\n{file_content}\n\nReturn the data in JSON format that matches the following schema:\n{schema}"
 
         response = ollama.chat(
             model=model_name,
