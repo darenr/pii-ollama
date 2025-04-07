@@ -52,12 +52,12 @@ def process_file_with_ollama_pydantic(file_path, model_name, instructions):
 
         schema = json.dumps(MedicalReportSummary.model_json_schema(), indent=2) #Correct way to get schema.
 
-        prompt = f"{instructions}\n\nFile Content:\n{file_content}\n\nReturn the data in JSON format that matches the following schema:\n{schema}"
+        prompt = f"{instructions}\n\nFile Content:\n{file_content}\n\nReturn the data in JSON format"
 
         response = ollama.chat(
             model=model_name,
             stream=False,
-            format='json',
+ 	    format=MedicalReportSummary.model_json_schema(),
             keep_alive="10m",
             messages=[
                 {
